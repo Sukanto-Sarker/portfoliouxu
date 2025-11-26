@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sukanto Sarker — Futuristic UX/UI Designer Portfolio</title>
+  <meta name="description" content="Ultra-modern UX/UI portfolio with neon accents, glassmorphism, advanced infinite animations, and interactive visuals by Sukanto Sarker." />
+  <meta name="author" content="Sukanto Sarker" />
+  <meta property="og:title" content="Sukanto Sarker — UX/UI Designer" />
+  <meta property="og:description" content="Neon, glassmorphism, heavy animations, and interactive portfolio." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://via.placeholder.com/1200x630.png?text=Sukanto+Sarker+UX%2FUI" />
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            neon: { blue: '#22D3EE', purple: '#8B5CF6' },
+            ink: { 900: '#0B0D12', 800: '#0F1117', 700: '#151823', 300:'#A5B4FC', 200:'#CBD5E1' },
+            glass: 'rgba(255,255,255,0.08)',
+          },
+          boxShadow: {
+            glow: '0 0 40px rgba(139,92,246,0.35)',
+            glownb: '0 0 40px rgba(34,211,238,0.35)',
+            soft: '0 20px 60px -20px rgba(0,0,0,0.45)',
+          },
+          backdropBlur: { xs: '2px' },
+          keyframes: {
+            marquee: { '0%': { transform: 'translateX(0)' }, '100%': { transform: 'translateX(-50%)' } },
+            float: { '0%,100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-10px)' } },
+            blob: { '0%,100%': { transform: 'translate(0,0) scale(1)' }, '50%': { transform: 'translate(10px,-10px) scale(1.05)' } },
+            hue: { '0%': { filter: 'hue-rotate(0deg)' }, '100%': { filter: 'hue-rotate(360deg)' } },
+            shimmer: { '0%': { backgroundPosition: '0% 50%' }, '100%': { backgroundPosition: '200% 50%' } },
+            fadeUp: { '0%': { opacity: 0, transform: 'translateY(16px)' }, '100%': { opacity: 1, transform: 'translateY(0)' } },
+            cardbelt: { '0%': { transform: 'translateX(0)' }, '100%': { transform: 'translateX(-50%)' } },
+            pulseLight: { '0%,100%': { opacity: .35 }, '50%': { opacity: .65 } },
+          },
+          animation: {
+            marquee: 'marquee 30s linear infinite',
+            float: 'float 6s ease-in-out infinite',
+            blob: 'blob 12s ease-in-out infinite',
+            hue: 'hue 12s linear infinite',
+            shimmer: 'shimmer 2s linear infinite',
+            fadeUp: 'fadeUp .7s ease both',
+            cardbelt: 'cardbelt 40s linear infinite',
+            pulseLight: 'pulseLight 6s ease-in-out infinite',
+          },
+          transformOrigin: { 'center-top': '50% 0%' },
+        }
+      }
+    }
+
+  </script>
+
+  <style>
+    html, body { background: #0B0D12; }
+    .glass {
+      background: radial-gradient(120% 120% at 80% 0%, rgba(139,92,246,0.08), rgba(34,211,238,0.03) 45%, rgba(255,255,255,0.02) 80%);
+    }
+@keyframes slide {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(0); }
+}
+
+.animate-slide {
+  animation: slide 36s linear infinite;
+}
+.animate-slide:hover {
+  animation-play-state: paused;
+}
+
+    .glass-card {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      backdrop-filter: blur(10px);
+    }
+    .glass-card-light {
+      background: rgba(0,0,0,0.06);
+      border: 1px solid rgba(0,0,0,0.08);
+      backdrop-filter: blur(10px);
+    }
+    .track:hover .belt { animation-play-state: paused; }
+    .card-tilt { transform-style: preserve-3d; perspective: 1000px; }
+    .tilt-3d { transform: translateZ(40px); }
+    .cursor-dot, .cursor-light { pointer-events: none; }
+    .cursor-dot { position: fixed; width: 10px; height: 10px; border-radius: 50%; background: #8B5CF6; mix-blend-mode: screen; z-index: 60; }
+    .cursor-light { position: fixed; width: 220px; height: 220px; border-radius: 50%; background: radial-gradient(circle, rgba(139,92,246,0.18), rgba(34,211,238,0.08) 60%, transparent 70%); filter: blur(20px); z-index: 40; }
+    .shimmer {
+      background: linear-gradient(90deg, rgba(255,255,255,0.15), rgba(255,255,255,0.6), rgba(255,255,255,0.15));
+      background-size: 200% 100%;
+    }
+    .blurred { filter: blur(6px); }
+    .mix-glow { mix-blend-mode: screen; opacity: .5; }
+    .parallax { will-change: transform; }
+    .sticky-el { position: sticky; top: 120px; }
+  </style>
+</head>
+
+<body class="text-white selection:bg-purple-500/30 selection:text-white ">
+
+  <!-- Preloader -->
+  <div id="preloader" class="fixed inset-0 z-[70] flex items-center justify-center bg-[#0B0D12]">
+    <div class="relative">
+      <div class="h-14 w-14 rounded-full border-4 border-purple-500/20 border-t-purple-500 animate-spin"></div>
+      <div class="absolute inset-0 h-14 w-14 rounded-full border-4 border-cyan-400/20 border-b-cyan-400 animate-spin [animation-duration:1.3s]"></div>
+    </div>
+  </div>
+
+  <!-- Cursor -->
+  <div id="cursorLight" class="cursor-light"></div>
+  <div id="cursorDot" class="cursor-dot"></div>
+
+  <!-- Background Blobs -->
+  <div class="fixed inset-0 -z-10 overflow-hidden">
+    <div class="absolute -top-32 -left-32 w-[520px] h-[520px] rounded-full bg-purple-600/20 blur-3xl animate-blob"></div>
+    <div class="absolute top-10 right-0 w-[560px] h-[560px] rounded-full bg-cyan-400/20 blur-3xl animate-blob"></div>
+    <div class="absolute bottom-[-120px] left-1/3 w-[620px] h-[620px] rounded-full bg-purple-500/20 blur-3xl animate-blob hue"></div>
+  </div>
+
+  <!-- Navbar -->
+  <header id="navbar" class="fixed top-0 w-full z-50 transition-all duration-300 bg-black/30 backdrop-blur-md border-b border-white/10">
+    <nav class="max-w-7xl mx-auto h-20 px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+      <a href="#" class="flex items-center gap-3">
+        <div class="h-9 w-9 rounded-xl bg-white/10 grid place-items-center ring-1 ring-white/10 shadow-glow">
+          <span class="font-extrabold text-purple-400">SS</span>
+        </div>
+        <span class="font-semibold tracking-wide">Sukanto Sarker</span>
+      </a>
+      <ul class="hidden md:flex items-center gap-6 text-sm">
+        <li><a href="#portfolio" class="hover:text-purple-400">Portfolio</a></li>
+        <li><a href="#services" class="hover:text-purple-400">Services</a></li>
+        <li><a href="#about" class="hover:text-purple-400">About</a></li>
+        <li><a href="#case" class="hover:text-purple-400">Case Study</a></li>
+        <li><a href="#contact" class="hover:text-purple-400">Contact</a></li>
+      </ul>
+      <div class="flex items-center gap-2">
+       
+        <a href="#contact" class="hidden md:inline-flex items-center px-4 py-2 rounded-lg bg-purple-500 text-white font-medium shadow-glow hover:opacity-90">Hire Me</a>
+        <button id="menuBtn" class="md:hidden inline-flex items-center p-2 rounded-lg border border-white/10 bg-white/5">
+          <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h16M3 12h16M3 18h16"/></svg>
+        </button>
+      </div>
+    </nav>
+    <div id="mobileMenu" class="hidden md:hidden border-t border-white/10 bg-black/70 backdrop-blur">
+      <ul class="max-w-7xl mx-auto px-4 py-3 space-y-2 text-sm">
+        <li><a href="#portfolio" class="block py-2">Portfolio</a></li>
+        <li><a href="#services" class="block py-2">Services</a></li>
+        <li><a href="#about" class="block py-2">About</a></li>
+        <li><a href="#case" class="block py-2">Case Study</a></li>
+        <li><a href="#contact" class="block py-2">Contact</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section id="hero" class="pt-32 md:pt-40 pb-16 relative overflow-hidden">
+    <!-- Parallax BG -->
+    <div id="heroParallax" class="absolute inset-0 parallax">
+      <div class="absolute -top-24 -right-24 w-[780px] h-[780px] bg-gradient-to-br from-purple-500/30 to-cyan-400/30 rounded-full blur-3xl mix-glow animate-hue"></div>
+      <div class="absolute bottom-0 left-0 w-full h-1/3 bg-gradient-to-t from-black/60 to-transparent"></div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-12 items-center relative">
+      <div class="animate-fadeUp">
+        <span class="inline-block px-3 py-1 rounded-full bg-white/10 text-purple-300 text-xs font-semibold ring-1 ring-white/10">Futuristic UX/UI Designer</span>
+        <h1 class="mt-4 text-4xl md:text-6xl font-black leading-tight">
+          Designing Ultra-Modern Interfaces with Motion and Clarity
+        </h1>
+        <p class="mt-4 text-slate-300">
+          Neon accents, glassmorphism, and interactive motion—crafted for conversion and delight.
+        </p>
+        <div class="mt-8 flex items-center gap-3">
+          <a href="#contact" class="inline-flex items-center px-5 py-3 rounded-lg bg-purple-500 font-semibold shadow-glow hover:opacity-90">Start a Project</a>
+          <a href="#portfolio" class="inline-flex items-center px-5 py-3 rounded-lg bg-white/10 border border-white/10 font-semibold hover:bg-white/15">View Portfolio</a>
+        </div>
+      </div>
+
+      <div class="relative grid place-items-center">
+        <!-- Floating profile -->
+        <div class="relative animate-float">
+          <div class="absolute -inset-6 rounded-3xl bg-gradient-to-r from-purple-500/30 to-cyan-400/30 blur-2xl"></div>
+          <div class="relative rounded-3xl glass-card ring-1 ring-white/10 p-2 shadow-soft">
+            <img src="hero pic.png" alt="Sukanto Sarker" class="rounded-2xl object-cover w-[540px] h-[520px]" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Infinite Moving Portfolio (3D track) -->
+  <section id="portfolio" class="py-20 relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-10">
+      <h2 class="text-3xl md:text-4xl font-black">Selected Work</h2>
+      <p class="text-slate-300 mt-2">Hover to pause. Tilt and zoom for details.</p>
+    </div>
+
+    <div class="relative">
+      <!-- 3D perspective -->
+      <div class="track perspective-[1200px]">
+        <div class="belt flex gap-6 animate-cardbelt [animation-duration:18s] hover:[animation-play-state:paused] will-change-transform" style="transform-style:preserve-3d">
+          <!-- Repeatable card function: 10 unique, then duplicate for seamless loop -->
+          <!-- Row container width is 200%, animation translates -50% -->
+          <div class="flex gap-[210px] w-[200%]">
+            <div class="flex gap-6 w-1/2 ">
+              <!-- cards A -->
+              <!-- Card template -->
+              <template id="cardTemplate"></template>
+              <!-- Manually list 10 cards -->
+              <div class="group relative min-w-[320px] max-w-[320px] rounded-2xl glass-card ring-1 ring-white/10 p-2 shadow-soft translate-z-0 hover:shadow-glow transition transform-gpu hover:scale-[1.03]" data-title="Fintech Dashboard">
+                <img src="ecom.png" class="rounded-xl w-full h-48 object-cover" alt="">
+                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition"></div>
+                <div class="absolute bottom-3 left-3 opacity-0 group-hover:opacity-100 transition">
+                  <div class="px-3 py-1 rounded-lg bg-white/10 backdrop-blur text-sm">Fintech Dashboard</div>
+                </div>
+              </div>
+              <div class="group relative min-w-[320px] max-w-[320px] rounded-2xl glass-card ring-1 ring-white/10 p-2 shadow-soft hover:shadow-glow transition hover:scale-[1.03]" data-title="E‑commerce App">
+                <img src="ecom.png" class="rounded-xl w-full h-48 object-cover" alt="">
+                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition"></div>
+                <div class="absolute bottom-3 left-3 opacity-0 group-hover:opacity-100 transition">
+                  <div class="px-3 py-1 rounded-lg bg-white/10 backdrop-blur text-sm">E‑commerce App</div>
+                </div>
+              </div>
+              <div class="group relative min-w-[320px] max-w-[320px] rounded-2xl glass-card ring-1 ring-white/10 p-2 shadow-soft hover:shadow-glow transition hover:scale-[1.03]" data-title="SaaS Landing">
+                <img src="ecom.png" class="rounded-xl w-full h-48 object-cover" alt="">
+                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition"></div>
+                <div class="absolute bottom-3 left-3 opacity-0 group-hover:opacity-100 transition">
+                  <div class="px-3 py-1 rounded-lg bg-white/10 backdrop-blur text-sm">SaaS Landing</div>
+                </div>
+              </div>
+              <div class="group relative min-w-[320px] max-w-[320px] rounded-2xl glass-card ring-1 ring-white/10 p-2 shadow-soft hover:shadow-glow transition hover:scale-[1.03]" data-title="Health App">
+                <img src="ecom.png" class="rounded-xl w-full h-48 object-cover" alt="">
+                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition"></div>
+                <div class="absolute bottom-3 left-3 opacity-0 group-hover:opacity-100 transition">
+                  <div class="px-3 py-1 rounded-lg bg-white/10 backdrop-blur text-sm">Health App</div>
+                </div>
+              </div>
+              <div class="group relative min-w-[320px] max-w-[320px] rounded-2xl glass-card ring-1 ring-white/10 p-2 shadow-soft hover:shadow-glow transition hover:scale-[1.03]" data-title="Crypto Wallet">
+                <img src="ecom.png" class="rounded-xl w-full h-48 object-cover" alt="">
+                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition"></div>
+                <div class="absolute bottom-3 left-3 opacity-0 group-hover:opacity-100 transition">
+                  <div class="px-3 py-1 rounded-lg bg-white/10 backdrop-blur text-sm">Crypto Wallet</div>
+                </div>
+              </div>
+            </div>
+            <div class="flex gap-6 w-1/2">
+              <!-- cards B (duplicate types) -->
+              <div class="group relative min-w-[320px] max-w-[320px] rounded-2xl glass-card ring-1 ring-white/10 p-2 shadow-soft hover:shadow-glow transition hover:scale-[1.03]" data-title="Finance Charts">
+                <img src="ecom.png" class="rounded-xl w-full h-48 object-cover" alt="">
+                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition"></div>
+                <div class="absolute bottom-3 left-3 opacity-0 group-hover:opacity-100 transition"><div class="px-3 py-1 rounded-lg bg-white/10 backdrop-blur text-sm">Finance Charts</div></div>
+              </div>
+              <div class="group relative min-w-[320px] max-w-[320px] rounded-2xl glass-card ring-1 ring-white/10 p-2 shadow-soft hover:shadow-glow transition hover:scale-[1.03]" data-title="Travel UI">
+                <img src="ecom.png" class="rounded-xl w-full h-48 object-cover" alt="">
+                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition"></div>
+                <div class="absolute bottom-3 left-3 opacity-0 group-hover:opacity-100 transition"><div class="px-3 py-1 rounded-lg bg-white/10 backdrop-blur text-sm">Travel UI</div></div>
+              </div>
+              <div class="group relative min-w-[320px] max-w-[320px] rounded-2xl glass-card ring-1 ring-white/10 p-2 shadow-soft hover:shadow-glow transition hover:scale-[1.03]" data-title="Banking App">
+                <img src="ecom.png" class="rounded-xl w-full h-48 object-cover" alt="">
+                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition"></div>
+                <div class="absolute bottom-3 left-3 opacity-0 group-hover:opacity-100 transition"><div class="px-3 py-1 rounded-lg bg-white/10 backdrop-blur text-sm">Banking App</div></div>
+              </div>
+              <div class="group relative min-w-[320px] max-w-[320px] rounded-2xl glass-card ring-1 ring-white/10 p-2 shadow-soft hover:shadow-glow transition hover:scale-[1.03]" data-title="Product Configurator">
+                <img src="ecom.png" class="rounded-xl w-full h-48 object-cover" alt="">
+                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition"></div>
+                <div class="absolute bottom-3 left-3 opacity-0 group-hover:opacity-100 transition"><div class="px-3 py-1 rounded-lg bg-white/10 backdrop-blur text-sm">Product Configurator</div></div>
+              </div>
+              <div class="group relative min-w-[320px] max-w-[320px] rounded-2xl glass-card ring-1 ring-white/10 p-2 shadow-soft hover:shadow-glow transition hover:scale-[1.03]" data-title="Analytics Suite">
+                <img src="ecom.png" class="rounded-xl w-full h-48 object-cover" alt="">
+                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition"></div>
+                <div class="absolute bottom-3 left-3 opacity-0 group-hover:opacity-100 transition"><div class="px-3 py-1 rounded-lg bg-white/10 backdrop-blur text-sm">Analytics Suite</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Marquee -->
+      <div class="mt-14 overflow-hidden flex ">
+        <div class="whitespace-nowrap animate-marquee [animation-duration:36s] hover:[animation-play-state:paused] text-2xl md:text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-cyan-300 blur-[0.2px]">
+          <span>UX DESIGN • UI DESIGN • PRODUCT DESIGN • BRANDING • </span>
+          <span>UX DESIGN • UI DESIGN • PRODUCT DESIGN • BRANDING • </span>
+          <span>UX DESIGN • UI DESIGN • PRODUCT DESIGN • BRANDING • </span>
+        </div>
+        <div class="whitespace-nowrap animate-marquee [animation-duration:36s] hover:[animation-play-state:paused] text-2xl md:text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-cyan-300 blur-[0.2px]">
+          <span>UX DESIGN • UI DESIGN • PRODUCT DESIGN • BRANDING • </span>
+          <span>UX DESIGN • UI DESIGN • PRODUCT DESIGN • BRANDING • </span>
+          <span>UX DESIGN • UI DESIGN • PRODUCT DESIGN • BRANDING • </span>
+        </div>
+      </div>
+      <div class="mt-14 overflow-hidden flex">
+       <div class="whitespace-nowrap animate-slide text-2xl md:text-3xl font-extrabold text-transparent bg-clip-text      bg-gradient-to-r from-purple-400 to-cyan-300 blur-[0.2px]">
+    <span>UX DESIGN • UI DESIGN • PRODUCT DESIGN • BRANDING • </span>
+    <span>UX DESIGN • UI DESIGN • PRODUCT DESIGN • BRANDING • </span>
+    <span>UX DESIGN • UI DESIGN • PRODUCT DESIGN • BRANDING • </span>
+       </div>
+       <div class="whitespace-nowrap animate-slide text-2xl md:text-3xl font-extrabold text-transparent bg-clip-text      bg-gradient-to-r from-purple-400 to-cyan-300 blur-[0.2px]">
+    <span>UX DESIGN • UI DESIGN • PRODUCT DESIGN • BRANDING • </span>
+    <span>UX DESIGN • UI DESIGN • PRODUCT DESIGN • BRANDING • </span>
+    <span>UX DESIGN • UI DESIGN • PRODUCT DESIGN • BRANDING • </span>
+       </div>
+    </div>
+
+
+</div>
+
+  </section>
+
+  <!-- Services (staggered) -->
+  <section id="services" class="py-20 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="mb-12">
+        <h2 class="text-3xl md:text-4xl font-black">Expertise</h2>
+        <p class="text-slate-300 mt-2">Interfaces, systems, and motion that scale.</p>
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="service-card p-6 rounded-2xl glass-card ring-1 ring-white/10 translate-y-6 opacity-0">
+          <div class="h-12 w-12 rounded-xl bg-purple-500/20 text-purple-300 grid place-items-center mb-4">
+            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l7 4v10l-7 4-7-4V7z"/><path d="M12 7v10"/></svg>
+          </div>
+          <h3 class="font-bold mb-1">Product UX</h3>
+          <p class="text-sm text-slate-300">Flows, IA, and prototyping with motion and usability.</p>
+        </div>
+        <div class="service-card p-6 rounded-2xl glass-card ring-1 ring-white/10 translate-y-6 opacity-0">
+          <div class="h-12 w-12 rounded-xl bg-purple-500/20 text-purple-300 grid place-items-center mb-4">
+            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7h18M3 12h18M3 17h18"/></svg>
+          </div>
+          <h3 class="font-bold mb-1">UI Systems</h3>
+          <p class="text-sm text-slate-300">Design systems, tokens, and components in Figma.</p>
+        </div>
+        <div class="service-card p-6 rounded-2xl glass-card ring-1 ring-white/10 translate-y-6 opacity-0">
+          <div class="h-12 w-12 rounded-xl bg-purple-500/20 text-purple-300 grid place-items-center mb-4">
+            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v10H4zM8 18h8"/></svg>
+          </div>
+          <h3 class="font-bold mb-1">Motion & Micro‑interactions</h3>
+          <p class="text-sm text-slate-300">Delightful animations that clarify behavior.</p>
+        </div>
+        <div class="service-card p-6 rounded-2xl glass-card ring-1 ring-white/10 translate-y-6 opacity-0">
+          <div class="h-12 w-12 rounded-xl bg-purple-500/20 text-purple-300 grid place-items-center mb-4">
+            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16v12H4z"/><path d="M8 10h8M8 14h5"/></svg>
+          </div>
+          <h3 class="font-bold mb-1">Landing Pages</h3>
+          <p class="text-sm text-slate-300">High‑conversion pages with clear narrative.</p>
+        </div>
+        <div class="service-card p-6 rounded-2xl glass-card ring-1 ring-white/10 translate-y-6 opacity-0">
+          <div class="h-12 w-12 rounded-xl bg-purple-500/20 text-purple-300 grid place-items-center mb-4">
+            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 5h16v14H4z"/><path d="M8 9h8M8 13h6M8 17h4"/></svg>
+          </div>
+          <h3 class="font-bold mb-1">Design Strategy</h3>
+          <p class="text-sm text-slate-300">Research, KPIs, and prioritization frameworks.</p>
+        </div>
+        <div class="service-card p-6 rounded-2xl glass-card ring-1 ring-white/10 translate-y-6 opacity-0">
+          <div class="h-12 w-12 rounded-xl bg-purple-500/20 text-purple-300 grid place-items-center mb-4">
+            <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3 7h7l-5.5 4 2 7-6.5-4.5L5.5 20l2-7L2 9h7z"/></svg>
+          </div>
+          <h3 class="font-bold mb-1">Branding</h3>
+          <p class="text-sm text-slate-300">Visual identity and narrative aligned to product value.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About (floating card + skill bars) -->
+  <section id="about" class="py-20 relative overflow-hidden">
+    <div class="absolute inset-0 parallax">
+      <div class="absolute -right-20 top-10 w-[500px] h-[500px] bg-cyan-400/20 blur-3xl rounded-full animate-blob"></div>
+    </div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-12 items-start">
+      <div class="animate-float sticky-el rounded-2xl glass-card ring-1 ring-white/10 p-6 shadow-soft">
+        <h2 class="text-3xl md:text-4xl font-black">About Me</h2>
+        <p class="mt-3 text-slate-300">I design elegant, performant interfaces with a focus on motion, clarity, and measurable outcomes.</p>
+        <div class="mt-4 text-sm text-slate-300">Tools: Figma, After Effects, Framer, Principle</div>
+      </div>
+      <div class="space-y-6">
+        <div>
+          <div class="flex justify-between text-sm text-slate-300 mb-1"><span>Product UX</span><span>90%</span></div>
+          <div class="h-2 rounded-full bg-white/10 overflow-hidden">
+            <div class="progress h-full w-0 bg-gradient-to-r from-purple-500 to-cyan-400"></div>
+          </div>
+        </div>
+        <div>
+          <div class="flex justify-between text-sm text-slate-300 mb-1"><span>UI Systems</span><span>92%</span></div>
+          <div class="h-2 rounded-full bg-white/10 overflow-hidden">
+            <div class="progress h-full w-0 bg-gradient-to-r from-purple-500 to-cyan-400"></div>
+          </div>
+        </div>
+        <div>
+          <div class="flex justify-between text-sm text-slate-300 mb-1"><span>Motion Design</span><span>85%</span></div>
+          <div class="h-2 rounded-full bg-white/10 overflow-hidden">
+            <div class="progress h-full w-0 bg-gradient-to-r from-purple-500 to-cyan-400"></div>
+          </div>
+        </div>
+        <div>
+          <div class="flex justify-between text-sm text-slate-300 mb-1"><span>Branding</span><span>80%</span></div>
+          <div class="h-2 rounded-full bg-white/10 overflow-hidden">
+            <div class="progress h-full w-0 bg-gradient-to-r from-purple-500 to-cyan-400"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Case Study (sticky scroll + opacity transitions) -->
+  <section id="case" class="py-20 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl md:text-4xl font-black mb-10">Case Study: Fintech Dashboard</h2>
+      <div class="grid md:grid-cols-2 gap-10 items-start">
+        <div class="space-y-6">
+          <div class="rounded-2xl glass-card ring-1 ring-white/10 p-6 opacity-0 translate-y-4 case-step">
+            <h3 class="font-bold mb-2">Problem</h3>
+            <p class="text-slate-300">Users struggled to compare multi‑account performance quickly.</p>
+          </div>
+          <div class="rounded-2xl glass-card ring-1 ring-white/10 p-6 opacity-0 translate-y-4 case-step">
+            <h3 class="font-bold mb-2">Approach</h3>
+            <p class="text-slate-300">Re‑structured IA, progressive disclosure, and motion to guide scanning.</p>
+          </div>
+          <div class="rounded-2xl glass-card ring-1 ring-white/10 p-6 opacity-0 translate-y-4 case-step">
+            <h3 class="font-bold mb-2">Outcome</h3>
+            <p class="text-slate-300">Time‑to‑insight reduced by 38%, higher engagement on key charts.</p>
+          </div>
+        </div>
+        <div class="sticky top-28">
+          <div class="rounded-2xl glass-card ring-1 ring-white/10 p-3 shadow-glow">
+            <img src="fintec.png" class="rounded-xl w-[500px] h-[350px]" alt="Fintech Dashboard">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials (auto slider) -->
+  <section id="testimonials" class="py-20 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="mb-10">
+        <h2 class="text-3xl md:text-4xl font-black">Client Love</h2>
+      </div>
+      <div class="relative overflow-hidden rounded-2xl glass-card ring-1 ring-white/10">
+        <div id="slider" class="relative">
+          <div class="slide p-8 opacity-100 transition-opacity duration-700">
+            <p class="text-xl text-slate-200">“The animations clarified the UX, not just decorated it. Brilliant craft.”</p>
+            <div class="mt-4 text-sm text-slate-400">— A. Rahman, Product Lead</div>
+          </div>
+          <div class="slide p-8 absolute inset-0 opacity-0 transition-opacity duration-700">
+            <p class="text-xl text-slate-200">“Design system cut dev time significantly. Clear tokens and docs.”</p>
+            <div class="mt-4 text-sm text-slate-400">— N. Chowdhury, Engineering Manager</div>
+          </div>
+          <div class="slide p-8 absolute inset-0 opacity-0 transition-opacity duration-700">
+            <p class="text-xl text-slate-200">“Motion made onboarding intuitive. Metrics improved across the board.”</p>
+            <div class="mt-4 text-sm text-slate-400">— M. Hasan, Growth</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+
+  <!-- Contact -->
+  <section id="contact" class="py-20 relative">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl md:text-4xl font-black">Let’s Build Something Futuristic</h2>
+      <p class="mt-3 text-slate-300">Share your vision. I’ll respond within 24 hours.</p>
+      <form action="#" method="POST" class="mt-8 grid gap-4 text-left">
+        <div class="grid md:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-sm text-slate-300 mb-1">Name</label>
+            <input type="text" required class="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/10 focus:outline-none focus:ring-2 focus:ring-purple-500" placeholder="Your name">
+          </div>
+          <div>
+            <label class="block text-sm text-slate-300 mb-1">Email</label>
+            <input type="email" required class="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/10 focus:outline-none focus:ring-2 focus:ring-purple-500" placeholder="you@example.com">
+          </div>
+        </div>
+        <div>
+          <label class="block text-sm text-slate-300 mb-1">Message</label>
+          <textarea rows="5" required class="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/10 focus:outline-none focus:ring-2 focus:ring-purple-500" placeholder="Project goals, scope, timeline..."></textarea>
+        </div>
+        <div class="flex flex-wrap gap-3 items-center">
+          <button type="submit" class="relative inline-flex items-center px-6 py-3 rounded-lg text-black font-semibold bg-gradient-to-r from-purple-400 to-cyan-300 shadow-glow overflow-hidden">
+            <span class="relative z-10">Send Message</span>
+            <span class="absolute inset-0 opacity-30 shimmer animate-shimmer"></span>
+          </button>
+          <a href="https://wa.me/00000000000" target="_blank" rel="noopener" class="inline-flex items-center px-6 py-3 rounded-lg bg-white/10 border border-white/10">
+            <svg class="mr-2" width="20" height="20" viewBox="0 0 24 24" fill="#25D366"><path d="M20.52 3.48A11.92 11.92 0 0012 0C5.37 0 0 5.37 0 12a11.9 11.9 0 001.67 6.05L0 24l6.12-1.61A11.9 11.9 0 0012 24c6.63 0 12-5.37 12-12 0-3.19-1.24-6.19-3.48-8.52zM12 22a9.84 9.84 0 01-5.02-1.37l-.36-.21-3.63.96.97-3.54-.23-.37A9.9 9.9 0 012 12C2 6.49 6.49 2 12 2s10 4.49 10 10-4.49 10-10 10zm5.64-7.36c-.31-.16-1.84-.91-2.12-1.02-.28-.1-.49-.16-.7.16-.2.31-.8 1.02-.98 1.23-.18.2-.36.23-.67.08-.31-.16-1.3-.48-2.48-1.53-.92-.79-1.53-1.76-1.71-2.07-.18-.31-.02-.48.14-.64.14-.14.31-.36.47-.54.16-.18.2-.31.31-.52.1-.2.05-.39-.03-.54-.08-.16-.7-1.68-.96-2.3-.25-.6-.5-.52-.7-.52-.18-.01-.39-.01-.6-.01-.2 0-.52.08-.79.39-.28.31-1.04 1.02-1.04 2.47s1.07 2.86 1.22 3.06c.16.2 2.09 3.18 5.06 4.46.71.31 1.26.49 1.69.62.71.23 1.35.2 1.86.12.57-.08 1.84-.75 2.1-1.48.26-.73.26-1.36.18-1.49-.08-.13-.28-.21-.59-.36z"/></svg>
+            WhatsApp
+          </a>
+          <div class="flex items-center gap-3 text-sm text-slate-300">
+            <a href="#" class="hover:text-purple-300">Dribbble</a>
+            <span>·</span>
+            <a href="#" class="hover:text-purple-300">Behance</a>
+            <span>·</span>
+            <a href="#" class="hover:text-purple-300">Instagram</a>
+          </div>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-10 border-t border-white/10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-4">
+      <p class="text-sm text-slate-400">© <span id="year"></span> Sukanto Sarker. All rights reserved.</p>
+      <div class="flex items-center gap-4 text-sm">
+        <a href="#portfolio" class="hover:text-purple-300">Portfolio</a>
+        <a href="#services" class="hover:text-purple-300">Services</a>
+        <a href="#about" class="hover:text-purple-300">About</a>
+        <a href="#case" class="hover:text-purple-300">Case Study</a>
+        <a href="#contact" class="hover:text-purple-300">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    // Preloader
+    window.addEventListener('load', () => {
+      setTimeout(()=> document.getElementById('preloader')?.classList.add('opacity-0','pointer-events-none','transition','duration-700'), 300);
+      setTimeout(()=> document.getElementById('preloader')?.remove(), 1200);
+    });
+
+    // Navbar shrink
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      const y = window.scrollY;
+      navbar.style.height = y > 20 ? '68px' : '80px';
+      navbar.classList.toggle('bg-black/60', y > 20);
+    });
+
+    // Mobile menu
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    menuBtn?.addEventListener('click', ()=> mobileMenu.classList.toggle('hidden'));
+
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+   
+
+    // Cursor light + dot
+    const cLight = document.getElementById('cursorLight');
+    const cDot = document.getElementById('cursorDot');
+    window.addEventListener('mousemove', (e) => {
+      const { clientX:x, clientY:y } = e;
+      cLight.style.transform = `translate(${x-110}px, ${y-110}px)`;
+      cDot.style.transform = `translate(${x-5}px, ${y-5}px)`;
+    });
+
+    // Parallax (hero and bg)
+    const parallaxEls = document.querySelectorAll('.parallax');
+    window.addEventListener('scroll', () => {
+      const y = window.scrollY;
+      parallaxEls.forEach((el, i) => {
+        const speed = (i+1) * 0.05;
+        el.style.transform = `translateY(${y * speed}px)`;
+      });
+    });
+
+    // Tilt cards
+    document.querySelectorAll('.tilt-card').forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const cx = e.clientX - rect.left;
+        const cy = e.clientY - rect.top;
+        const rx = ((cy / rect.height) - 0.5) * -10;
+        const ry = ((cx / rect.width) - 0.5) * 10;
+        card.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg)`;
+      });
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = `rotateX(0) rotateY(0)`;
+      });
+    });
+
+    // Services stagger reveal
+    const serviceCards = document.querySelectorAll('.service-card');
+    const ioServices = new IntersectionObserver(entries=>{
+      entries.forEach((ent, idx)=>{
+        if(ent.isIntersecting){
+          ent.target.style.transition = 'all .6s ease';
+          ent.target.style.opacity = 1;
+          ent.target.style.transform = 'translateY(0)';
+          ioServices.unobserve(ent.target);
+        }
+      });
+    }, { threshold: 0.2 });
+    serviceCards.forEach((el,i)=> {
+      el.style.transitionDelay = `${i*100}ms`;
+      ioServices.observe(el);
+    });
+
+    // Skill bars
+    const bars = document.querySelectorAll('#about .progress');
+    const ioBars = new IntersectionObserver(entries=>{
+      entries.forEach(ent=>{
+        if(ent.isIntersecting){
+          const el = ent.target;
+          const label = el.parentElement.previousElementSibling?.querySelector('span:last-child')?.textContent || '80%';
+          const pct = parseInt(label) || 80;
+          el.style.transition = 'width 1.2s ease';
+          el.style.width = pct + '%';
+          ioBars.unobserve(el);
+        }
+      });
+    }, { threshold: 0.4 });
+    bars.forEach(el=> ioBars.observe(el));
+
+    // Case study opacity transition on scroll
+    const steps = document.querySelectorAll('.case-step');
+    const ioCase = new IntersectionObserver(entries=>{
+      entries.forEach(ent=>{
+        if(ent.isIntersecting){
+          ent.target.classList.add('animate-fadeUp');
+          ent.target.style.opacity = 1;
+          ent.target.style.transform = 'translateY(0)';
+          ioCase.unobserve(ent.target);
+        }
+      });
+    }, { threshold: 0.2 });
+    steps.forEach(el=> ioCase.observe(el));
+
+    // Testimonials slider
+    const slides = document.querySelectorAll('#slider .slide');
+    let idx = 0;
+    setInterval(()=>{
+      slides[idx].style.opacity = 0;
+      idx = (idx + 1) % slides.length;
+      slides[idx].style.opacity = 1;
+    }, 4000);
+
+    // Pause belt on hover is via CSS; also pause on focus
+    document.querySelectorAll('.belt .group').forEach(card=>{
+      card.addEventListener('mouseenter', ()=> card.parentElement.parentElement.classList.add('paused'));
+      card.addEventListener('mouseleave', ()=> card.parentElement.parentElement.classList.remove('paused'));
+    });
+  </script>
+</body>
+</html>
